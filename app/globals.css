@@ -1,26 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #080c14;
+  --bg-card: #0d1220;
+  --teal: #2dd4bf;
+  --amber: #f59e0b;
+  --blue: #60a5fa;
+  --border: rgba(255,255,255,0.07);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
 }
+
+.font-display { font-family: 'Space Grotesk', sans-serif !important; }
+.font-mono { font-family: 'JetBrains Mono', monospace !important; }
+
+/* ─── Hero Grid ─── */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+
+/* ─── Stat Cards ─── */
+.stat-card {
+  padding: 16px 24px;
+  background: rgba(13, 18, 32, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+/* ─── Demo Card ─── */
+.demo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* ─── Video Container ─── */
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #050810;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* ─── Scan corners ─── */
+.scan-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--teal);
+  border-style: solid;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.scan-corner.tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+.scan-corner.tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.scan-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+.scan-corner.br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+/* ─── Prediction Overlay ─── */
+.prediction-overlay {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  backdrop-filter: blur(12px);
+}
+.mask-on {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+}
+.mask-off {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+/* ─── Confidence Bar ─── */
+.confidence-bar-track {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.confidence-bar-fill {
+  height: 100%;
+  background: currentColor;
+  border-radius: 99px;
+  transition: width 0.3s ease;
+}
+
+/* ─── Upload Dropzone ─── */
+.upload-dropzone {
+  aspect-ratio: 4/3;
+  border: 2px dashed rgba(255,255,255,0.1);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: inherit;
+}
+.upload-dropzone:hover {
+  border-color: var(--teal);
+  background: rgba(45, 212, 191, 0.03);
+}
+
+/* ─── Pipeline Steps ─── */
+.pipeline-step {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+.pipeline-step:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.step-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: rgba(245, 158, 11, 0.2);
+  line-height: 1;
+  min-width: 48px;
+}
+.step-connector {
+  width: 2px;
+  height: 8px;
+  background: linear-gradient(to bottom, rgba(245,158,11,0.2), transparent);
+  margin: 0 24px;
+}
+
+/* ─── Dist Cards ─── */
+.dist-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid;
+}
+
+/* ─── Layer Card ─── */
+.layer-card {
+  cursor: default;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #374151; }
